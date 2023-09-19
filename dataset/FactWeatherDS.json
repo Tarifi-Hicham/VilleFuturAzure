@@ -1,0 +1,52 @@
+{
+	"name": "FactWeatherDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageVilleFuture",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "FactWeatherMetrics.csv",
+				"container": "containerhicham"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "DateID",
+				"type": "String"
+			},
+			{
+				"name": "RegionID",
+				"type": "String"
+			},
+			{
+				"name": "AverageTemperature",
+				"type": "String"
+			},
+			{
+				"name": "Humidity",
+				"type": "String"
+			},
+			{
+				"name": "WindSpeed",
+				"type": "String"
+			},
+			{
+				"name": "Rainfall",
+				"type": "String"
+			},
+			{
+				"name": "SunshineHours",
+				"type": "String"
+			}
+		]
+	}
+}

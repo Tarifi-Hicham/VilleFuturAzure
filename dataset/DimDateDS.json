@@ -1,0 +1,32 @@
+{
+	"name": "DimDateDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageVilleFuture",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "DimDate.csv",
+				"container": "containerhicham"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "DateID",
+				"type": "String"
+			},
+			{
+				"name": "Date",
+				"type": "String"
+			}
+		]
+	}
+}

@@ -1,0 +1,61 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DimDateDS",
+						"type": "DatasetReference"
+					},
+					"name": "Date"
+				},
+				{
+					"dataset": {
+						"referenceName": "DimRegionDS",
+						"type": "DatasetReference"
+					},
+					"name": "Region"
+				},
+				{
+					"dataset": {
+						"referenceName": "FactWeatherDS",
+						"type": "DatasetReference"
+					},
+					"name": "Weather"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          DateID as string,",
+				"          Date as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Date",
+				"source(output(",
+				"          RegionID as string,",
+				"          RegionName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Region",
+				"source(output(",
+				"          DateID as string,",
+				"          RegionID as string,",
+				"          AverageTemperature as string,",
+				"          Humidity as string,",
+				"          WindSpeed as string,",
+				"          Rainfall as string,",
+				"          SunshineHours as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Weather"
+			]
+		}
+	}
+}

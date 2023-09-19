@@ -1,0 +1,32 @@
+{
+	"name": "DimRegionDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageVilleFuture",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "DimRegion.csv",
+				"container": "containerhicham"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "RegionID",
+				"type": "String"
+			},
+			{
+				"name": "RegionName",
+				"type": "String"
+			}
+		]
+	}
+}
