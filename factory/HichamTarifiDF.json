@@ -1,0 +1,9 @@
+{
+	"name": "HichamTarifiDF",
+	"location": "francecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c2e8bc20-2186-4c9b-bd6e-842ae23684a9",
+		"tenantId": "a2e466aa-4f86-4545-b5b8-97da7c8febf3"
+	}
+}
