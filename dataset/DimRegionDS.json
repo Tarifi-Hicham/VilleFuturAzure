@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "DimRegion.csv",
-				"container": "containerhicham"
+				"container": "hichamtarificontainer"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
