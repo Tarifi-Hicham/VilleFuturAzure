@@ -29,21 +29,21 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DimDateOutput",
+						"referenceName": "AzureSqlTableDimDate",
 						"type": "DatasetReference"
 					},
 					"name": "DimDateOutput"
 				},
 				{
 					"dataset": {
-						"referenceName": "DimRegionOutput",
+						"referenceName": "AzureSqlTableDimRegion",
 						"type": "DatasetReference"
 					},
 					"name": "DimRegionOutput"
 				},
 				{
 					"dataset": {
-						"referenceName": "FactWheatherOutput",
+						"referenceName": "AzureSqlTableFactWheather",
 						"type": "DatasetReference"
 					},
 					"name": "FactWheatherOutput"
@@ -79,19 +79,51 @@
 				"     ignoreNoFilesFound: false) ~> FactWheather",
 				"DimDate sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['DimDateOutput.csv'],",
+				"     input(",
+				"          DateID as integer,",
+				"          Date as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> DimDateOutput",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> DimDateOutput",
 				"DimRegion sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['DimRegionOutput.csv'],",
+				"     input(",
+				"          RegionID as integer,",
+				"          Region as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> DimRegionOutput",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> DimRegionOutput",
 				"FactWheather sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['FactWheatherOutput.csv'],",
+				"     input(",
+				"          DateID as integer,",
+				"          RegionID as integer,",
+				"          AverageTemperature as integer,",
+				"          Humidity as integer,",
+				"          WindSpeed as integer,",
+				"          Rainfall as integer,",
+				"          SunshineHours as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> FactWheatherOutput"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> FactWheatherOutput"
 			]
 		}
 	}
