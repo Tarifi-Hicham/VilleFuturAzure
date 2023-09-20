@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "VilleFutureDF",
+				"name": "dataflow1",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
