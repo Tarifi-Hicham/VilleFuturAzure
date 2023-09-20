@@ -1,0 +1,22 @@
+{
+	"name": "DimRegionOutput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageVilleFuture",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "outputcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
