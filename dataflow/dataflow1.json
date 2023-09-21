@@ -91,6 +91,7 @@
 				"     staged: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> DimDateOutput",
 				"DimRegion sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
