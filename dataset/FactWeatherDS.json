@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "FactWeatherMetrics.csv",
-				"container": "hichamtarificontainer"
+				"container": "input"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
