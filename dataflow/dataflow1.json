@@ -28,23 +28,23 @@
 			],
 			"sinks": [
 				{
-					"linkedService": {
-						"referenceName": "AzureSqlDatabase1",
-						"type": "LinkedServiceReference"
+					"dataset": {
+						"referenceName": "AzureSynapseAnalyticsTableDate",
+						"type": "DatasetReference"
 					},
 					"name": "DimDateOutput"
 				},
 				{
-					"linkedService": {
-						"referenceName": "AzureSqlDatabase1",
-						"type": "LinkedServiceReference"
+					"dataset": {
+						"referenceName": "AzureSqlTableDimRegion",
+						"type": "DatasetReference"
 					},
 					"name": "DimRegionOutput"
 				},
 				{
-					"linkedService": {
-						"referenceName": "AzureSqlDatabase1",
-						"type": "LinkedServiceReference"
+					"dataset": {
+						"referenceName": "AzureSqlTableFactWheather",
+						"type": "DatasetReference"
 					},
 					"name": "FactWheatherOutput"
 				}
@@ -79,40 +79,49 @@
 				"     ignoreNoFilesFound: false) ~> FactWheather",
 				"DimDate sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          DateID as integer,",
+				"          Date as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
 				"     format: 'table',",
-				"     store: 'sqlserver',",
-				"     schemaName: 'dbo',",
-				"     tableName: 'DimDate',",
-				"     insertable: true,",
-				"     updateable: false,",
-				"     deletable: false,",
-				"     upsertable: false,",
+				"     staged: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> DimDateOutput",
 				"DimRegion sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          RegionID as integer,",
+				"          Region as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
 				"     format: 'table',",
-				"     store: 'sqlserver',",
-				"     schemaName: 'dbo',",
-				"     tableName: 'DimRegion',",
-				"     insertable: true,",
-				"     updateable: false,",
-				"     deletable: false,",
-				"     upsertable: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> DimRegionOutput",
 				"FactWheather sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          DateID as integer,",
+				"          RegionID as integer,",
+				"          AverageTemperature as integer,",
+				"          Humidity as integer,",
+				"          WindSpeed as integer,",
+				"          Rainfall as integer,",
+				"          SunshineHours as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
 				"     format: 'table',",
-				"     store: 'sqlserver',",
-				"     schemaName: 'dbo',",
-				"     tableName: 'FactWeatherMetrics',",
-				"     insertable: true,",
-				"     updateable: false,",
-				"     deletable: false,",
-				"     upsertable: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> FactWheatherOutput"
