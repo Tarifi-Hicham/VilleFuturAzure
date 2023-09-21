@@ -42,10 +42,18 @@
 					"name": "DimRegionOutput"
 				},
 				{
+					"dataset": {
+						"referenceName": "AzureSynapseAnalyticsTableWheather",
+						"type": "DatasetReference"
+					},
 					"name": "FactWheatherOutput"
 				}
 			],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "alterDimRegion"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          DateID as integer,",
@@ -55,10 +63,10 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> DimDate",
 				"source(output(",
-				"          RegionID as integer,",
+				"          RegionID as short,",
 				"          RegionName as string",
 				"     ),",
-				"     allowSchemaDrift: true,",
+				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> DimRegion",
 				"source(output(",
@@ -73,6 +81,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> FactWheather",
+				"DimRegion alterRow(upsertIf(1==1)) ~> alterDimRegion",
 				"DimDate sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -83,22 +92,24 @@
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
+				"     truncate:true,",
 				"     format: 'table',",
 				"     staged: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 1,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> DimDateOutput",
-				"DimRegion sink(allowSchemaDrift: true,",
+				"alterDimRegion sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          RegionID as integer,",
 				"          Region as string",
 				"     ),",
 				"     deletable:false,",
-				"     insertable:true,",
+				"     insertable:false,",
 				"     updateable:false,",
-				"     upsertable:false,",
+				"     upsertable:true,",
+				"     keys:['RegionID'],",
 				"     format: 'table',",
 				"     staged: true,",
 				"     skipDuplicateMapInputs: true,",
@@ -106,9 +117,25 @@
 				"     errorHandlingOption: 'stopOnFirstError') ~> DimRegionOutput",
 				"FactWheather sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          DateID as integer,",
+				"          RegionID as integer,",
+				"          AverageTemperature as integer,",
+				"          Humidity as integer,",
+				"          WindSpeed as integer,",
+				"          Rainfall as integer,",
+				"          SunshineHours as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     truncate:true,",
+				"     format: 'table',",
+				"     staged: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     format: 'table') ~> FactWheatherOutput"
+				"     errorHandlingOption: 'stopOnFirstError') ~> FactWheatherOutput"
 			]
 		}
 	}

@@ -19,6 +19,13 @@
 						"referenceName": "dataflow1",
 						"type": "DataFlowReference"
 					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "AzureBlobStorageVilleFuture",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "output"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
