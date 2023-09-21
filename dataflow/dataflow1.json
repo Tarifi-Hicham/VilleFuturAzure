@@ -36,16 +36,12 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTableDimRegion",
+						"referenceName": "AzureSynapseAnalyticsTableRegion",
 						"type": "DatasetReference"
 					},
 					"name": "DimRegionOutput"
 				},
 				{
-					"dataset": {
-						"referenceName": "AzureSqlTableFactWheather",
-						"type": "DatasetReference"
-					},
 					"name": "FactWheatherOutput"
 				}
 			],
@@ -104,28 +100,15 @@
 				"     updateable:false,",
 				"     upsertable:false,",
 				"     format: 'table',",
+				"     staged: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> DimRegionOutput",
 				"FactWheather sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          DateID as integer,",
-				"          RegionID as integer,",
-				"          AverageTemperature as integer,",
-				"          Humidity as integer,",
-				"          WindSpeed as integer,",
-				"          Rainfall as integer,",
-				"          SunshineHours as integer",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> FactWheatherOutput"
+				"     format: 'table') ~> FactWheatherOutput"
 			]
 		}
 	}
