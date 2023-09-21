@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "CREATE TABLE [DimDate] (\n  [DateID] Integer NOT NULL,\n  [Date] Date\n);\n\nCREATE TABLE [DimRegion] (\n  [RegionID] Integer NOT NULL,\n  [Region] Varchar(255)\n);\n\nCREATE TABLE [FactWeatherMetrics] (\n  [DateID] Integer NOT NULL,\n  [RegionID] Integer NOT NULL,\n  [AverageTemperature] Integer,\n  [Humidity] Integer,\n  [WindSpeed] Integer,\n  [Rainfall] Integer,\n  [SunshineHours] Integer\n);\n\nALTER TABLE DimDate add CONSTRAINT PK_DimDate PRIMARY KEY NONCLUSTERED (DateID) NOT ENFORCED;\nALTER TABLE DimRegion add CONSTRAINT PK_DimRegion PRIMARY KEY NONCLUSTERED (RegionID) NOT ENFORCED;\nALTER TABLE FactWeatherMetrics add CONSTRAINT PK_FactWeatherMetrics1 PRIMARY KEY NONCLUSTERED (DateID) NOT ENFORCED;\nALTER TABLE FactWeatherMetrics add CONSTRAINT PK_FactWeatherMetrics2 PRIMARY KEY NONCLUSTERED (RegionID) NOT ENFORCED;\n\nCREATE MASTER KEY ENCRYPTION BY PASSWORD = 'P@ssword2023';",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "tarifihichamdsp",
+				"poolName": "tarifihichamdsp"
+			},
+			"resultLimit": -1
+		},
+		"type": "SqlQuery"
+	}
+}
